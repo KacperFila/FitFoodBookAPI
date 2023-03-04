@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "K9sXA0ZP1p3c/2H3OZI+/OgHyDQou8HEVXrOc9zdZ80HQ2EvqFrYZDOlsDzovWuAtySEBUU4ToWYNJXMtNV4eA==",
+  "dgSpecHash": "jfcWrRz2lv6//gimkA31ZAVkrB5Iw/5D1supPBjArha4OK+oS5YUh/CYngT/B3C0ESZW6GcNVg26noI/7hElWQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\kacpe\\Documents\\GitHub\\FitFoodBook\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kacpe\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\kacpe\\.nuget\\packages\\mediatr\\11.0.0\\mediatr.11.0.0.nupkg.sha512",
+    "C:\\Users\\kacpe\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.0\\microsoft.data.sqlclient.5.1.0.nupkg.sha512",
