@@ -38,7 +38,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 #pragma warning restore 612, 618
         }
