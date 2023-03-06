@@ -8,6 +8,6 @@ public class Recipe_RecipeTagConfiguration : IEntityTypeConfiguration<Recipe_Rec
 {
     public void Configure(EntityTypeBuilder<Recipe_RecipeTag> builder)
     {
-        builder.HasKey(rrt => new { rrt.RecipeId, rrt.RecipeTagId });
+      //  builder.HasKey(rrt => new { rrt.RecipeId, rrt.RecipeTagId });
     }
 }
