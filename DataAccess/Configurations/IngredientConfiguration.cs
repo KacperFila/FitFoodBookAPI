@@ -21,35 +21,17 @@ public class IngredientConfiguration : IEntityTypeConfiguration<Ingredient>
         builder.Property(x => x.Fats)
             .IsRequired();
 
-        //MANY TO MANY z IngredientTag
-        builder.HasMany(x => x.IngredientTags)
-            .WithMany(x => x.Ingredients)
-            .UsingEntity<IngredientIngredientTag>(
-                
-                x => x.HasOne(c => c.IngredientTag)
+        builder.HasMany(r => r.IngredientTags)
+            .WithMany(rt => rt.Ingredients)
+            .UsingEntity<Ingredient_IngredientTag>(
+                iit => iit.HasOne(iit => iit.IngredientTag)
                     .WithMany()
-                    .HasForeignKey(v => v.IngredientTagId),
-                
-                x => x.HasOne(c => c.Ingredient)
+                    .HasForeignKey(iit => iit.IngredientTagId),
+                iit => iit.HasOne(iit => iit.Ingredient)
                     .WithMany()
-                    .HasForeignKey(v => v.IngredientId),
-                
-                x => x.HasKey(c => new {c.IngredientId, c.IngredientTagId})
+                    .HasForeignKey(iit => iit.IngredientId),
+                iit => iit.HasKey(iit => new {iit.IngredientId, iit.IngredientTagId})
             );
         
-        //MANY TO MANY z Recipe
-        builder.HasMany(x => x.Recipes)
-            .WithMany(x => x.Ingredients)
-            .UsingEntity<IngredientRecipe>(
-                x => x.HasOne(c => c.Recipe)
-                    .WithMany()
-                    .HasForeignKey(v => v.RecipeId),
-                
-                x => x.HasOne(c => c.Ingredient)
-                    .WithMany()
-                    .HasForeignKey(v => v.IngredientId),
-                
-                x => x.HasKey(c => new {c.IngredientId, c.RecipeId})
-            );
     }
 }

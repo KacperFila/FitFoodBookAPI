@@ -13,8 +13,7 @@ public class Recipe
     public DateTime AddedDate { get; set; }
     public DateTime? ModifiedDate { get; set; }
     public Guid UserId { get; set; }
-    public User Author { get; set; }
+    public User User { get; set; }
     public List<Ingredient> Ingredients { get; set; }
-    
-    public List<RecipeTag>? RecipeTags { get; set; }
+    public List<RecipeTag> RecipeTags { get; set; }
 }

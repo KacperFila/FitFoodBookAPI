@@ -17,11 +17,14 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(20);
 
         builder.Property(x => x.Email)
-            .IsRequired();
+            .IsRequired()
+            .HasMaxLength(20);
 
         builder.Property(x => x.DateOfBirth)
             .IsRequired();
-
-        builder.HasMany(x => x.Recipes).WithOne(x => x.Author);
+        
+        builder.HasMany(u => u.Recipes)
+            .WithOne(r => r.User)
+            .HasForeignKey(r => r.UserId);
     }
 }

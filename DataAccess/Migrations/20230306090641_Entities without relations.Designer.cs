@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(FitFoodBookDbContext))]
-    partial class FitFoodBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230306090641_Entities without relations")]
+    partial class Entitieswithoutrelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,110 +148,15 @@ namespace DataAccess.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("IngredientIngredientTag", b =>
-                {
-                    b.Property<Guid>("IngredientTagsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("IngredientsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("IngredientTagsId", "IngredientsId");
-
-                    b.HasIndex("IngredientsId");
-
-                    b.ToTable("IngredientIngredientTag");
-                });
-
-            modelBuilder.Entity("IngredientRecipe", b =>
-                {
-                    b.Property<Guid>("IngredientsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("RecipesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("IngredientsId", "RecipesId");
-
-                    b.HasIndex("RecipesId");
-
-                    b.ToTable("IngredientRecipe");
-                });
-
-            modelBuilder.Entity("RecipeRecipeTag", b =>
-                {
-                    b.Property<Guid>("RecipeTagsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("RecipesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("RecipeTagsId", "RecipesId");
-
-                    b.HasIndex("RecipesId");
-
-                    b.ToTable("RecipeRecipeTag");
-                });
-
             modelBuilder.Entity("Domain.Entities.Recipe", b =>
                 {
-                    b.HasOne("Domain.Entities.User", "User")
-                        .WithMany("Recipes")
+                    b.HasOne("Domain.Entities.User", "Author")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("IngredientIngredientTag", b =>
-                {
-                    b.HasOne("Domain.Entities.IngredientTag", null)
-                        .WithMany()
-                        .HasForeignKey("IngredientTagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Ingredient", null)
-                        .WithMany()
-                        .HasForeignKey("IngredientsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("IngredientRecipe", b =>
-                {
-                    b.HasOne("Domain.Entities.Ingredient", null)
-                        .WithMany()
-                        .HasForeignKey("IngredientsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Recipe", null)
-                        .WithMany()
-                        .HasForeignKey("RecipesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RecipeRecipeTag", b =>
-                {
-                    b.HasOne("Domain.Entities.RecipeTag", null)
-                        .WithMany()
-                        .HasForeignKey("RecipeTagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Recipe", null)
-                        .WithMany()
-                        .HasForeignKey("RecipesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.User", b =>
-                {
-                    b.Navigation("Recipes");
+                    b.Navigation("Author");
                 });
 #pragma warning restore 612, 618
         }

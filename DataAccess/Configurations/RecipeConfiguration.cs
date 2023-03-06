@@ -36,18 +36,31 @@ public class RecipeConfiguration : IEntityTypeConfiguration<Recipe>
         builder.Property(x => x.ModifiedDate)
             .ValueGeneratedOnAddOrUpdate()
             .HasDefaultValueSql("GETDATE()");
-        
-        //MANY TO MANY z RecipeTag
-        builder.HasMany(x => x.RecipeTags)
-            .WithMany(c => c.Recipes)
-            .UsingEntity<RecipeRecipeTag>(
-                x => x.HasOne(c => c.RecipeTag)
+
+        builder.HasMany(r => r.Ingredients)
+            .WithMany(i => i.Recipes)
+            .UsingEntity<Recipe_Ingredient>(
+                ri => ri.HasOne(ri => ri.Ingredient)
                     .WithMany()
-                    .HasForeignKey(v => v.RecipeTagId),
-                x => x.HasOne(c => c.Recipe)
+                    .HasForeignKey(ri => ri.IngredientId),
+
+                ri => ri.HasOne(ri => ri.Recipe)
                     .WithMany()
-                    .HasForeignKey(v => v.RecipeTagId),
-                x => x.HasKey(c => new{ c.RecipeId, c.RecipeTagId})
-                );
+                    .HasForeignKey(ri => ri.RecipeId),
+
+                ri => ri.HasKey(ri => new { ri.IngredientId, ri.RecipeId })
+            );
+
+        builder.HasMany(r => r.RecipeTags)
+            .WithMany(rt => rt.Recipes)
+            .UsingEntity<Recipe_RecipeTag>(
+                rrt => rrt.HasOne(rrt => rrt.RecipeTag)
+                    .WithMany()
+                    .HasForeignKey(rrt => rrt.RecipeTagId),
+                rrt => rrt.HasOne(rrt => rrt.Recipe)
+                    .WithMany()
+                    .HasForeignKey(rrt => rrt.RecipeId),
+                rrt => rrt.HasKey(rrt => new {rrt.RecipeId, rrt.RecipeTagId})
+            );
     }
 };

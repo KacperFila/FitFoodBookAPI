@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities;
 
-public class IngredientIngredientTag
+public class Ingredient_IngredientTag
 {
     public Ingredient Ingredient { get; set; }
     public Guid IngredientId { get; set; }
