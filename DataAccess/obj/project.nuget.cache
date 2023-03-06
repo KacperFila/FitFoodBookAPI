@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "zf2xDkJR4oEr2TJL6sPsSxMfTOf423TtprynQOAqUfvt//ZnNr9ZNwFdMbLNkad2a2LatJdXnAbV0lRaW8eAbg==",
+  "dgSpecHash": "c2p+iOpTK3CklgAj5kSdmfM/85IgucA9DmqlNqz2d2mJpyhQvQ1mf/BjlHNszGIorufxENza+UjbWpAj2pes3w==",
   "success": true,
   "projectFilePath": "C:\\Users\\kacpe\\Documents\\GitHub\\FitFoodBook\\DataAccess\\DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kacpe\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\kacpe\\.nuget\\packages\\bogus\\34.0.2\\bogus.34.0.2.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\mediatr\\11.0.0\\mediatr.11.0.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",

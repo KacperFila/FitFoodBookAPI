@@ -4,12 +4,12 @@ public class Recipe
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
-    public string TimeOfPreparing { get; set; }
-    public string Calories { get; set; }
+    public int TimeOfPreparing { get; set; }
+    public int Calories { get; set; }
     public int Proteins { get; set; }
     public int Carbohydrates { get; set; }
     public int Fats { get; set; }
-    public string AmountOfServings { get; set; }
+    public int AmountOfServings { get; set; }
     public DateTime AddedDate { get; set; }
     public DateTime? ModifiedDate { get; set; }
     public Guid UserId { get; set; }

@@ -17,10 +17,10 @@ public class RecipeConfiguration : IEntityTypeConfiguration<Recipe>
 
         builder.Property(x => x.Carbohydrates)
             .IsRequired();
-        
+
         builder.Property(x => x.Proteins)
             .IsRequired();
-        
+
         builder.Property(x => x.Fats)
             .IsRequired();
 
@@ -43,11 +43,9 @@ public class RecipeConfiguration : IEntityTypeConfiguration<Recipe>
                 ri => ri.HasOne(ri => ri.Ingredient)
                     .WithMany()
                     .HasForeignKey(ri => ri.IngredientId),
-
                 ri => ri.HasOne(ri => ri.Recipe)
                     .WithMany()
                     .HasForeignKey(ri => ri.RecipeId),
-
                 ri => ri.HasKey(ri => new { ri.IngredientId, ri.RecipeId })
             );
 
@@ -60,7 +58,7 @@ public class RecipeConfiguration : IEntityTypeConfiguration<Recipe>
                 rrt => rrt.HasOne(rrt => rrt.Recipe)
                     .WithMany()
                     .HasForeignKey(rrt => rrt.RecipeId),
-                rrt => rrt.HasKey(rrt => new {rrt.RecipeId, rrt.RecipeTagId})
+                rrt => rrt.HasKey(rrt => new { rrt.RecipeId, rrt.RecipeTagId })
             );
     }
-};
+}

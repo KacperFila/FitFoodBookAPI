@@ -11,14 +11,14 @@ public class UserRepository : IUserRepository
     {
         _context = context;
     }
-    
+
     public async Task<User> CreateUser(User user)
     {
         _context.Add(user);
-            await _context.SaveChangesAsync();
-            return user;
+        await _context.SaveChangesAsync();
+        return user;
     }
-        
+
     public Task<IEnumerable<User>> GetUsers()
     {
         throw new NotImplementedException();
@@ -28,5 +28,4 @@ public class UserRepository : IUserRepository
     {
         throw new NotImplementedException();
     }
-
 }

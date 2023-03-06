@@ -5,19 +5,19 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace DataAccess.Configurations;
 
 public class IngredientConfiguration : IEntityTypeConfiguration<Ingredient>
-{ 
+{
     public void Configure(EntityTypeBuilder<Ingredient> builder)
     {
         builder.Property(x => x.Name)
             .IsRequired()
             .HasMaxLength(40);
-        
+
         builder.Property(x => x.Proteins)
             .IsRequired();
-        
+
         builder.Property(x => x.Carbohydrates)
             .IsRequired();
-        
+
         builder.Property(x => x.Fats)
             .IsRequired();
 
@@ -30,8 +30,7 @@ public class IngredientConfiguration : IEntityTypeConfiguration<Ingredient>
                 iit => iit.HasOne(iit => iit.Ingredient)
                     .WithMany()
                     .HasForeignKey(iit => iit.IngredientId),
-                iit => iit.HasKey(iit => new {iit.IngredientId, iit.IngredientTagId})
+                iit => iit.HasKey(iit => new { iit.IngredientId, iit.IngredientTagId })
             );
-        
     }
 }

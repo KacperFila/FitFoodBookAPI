@@ -2,6 +2,7 @@ using System.Reflection;
 using Application.Abstractions;
 using DataAccess;
 using DataAccess.Repositories;
+using DataAccess.Seeders;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,5 +15,8 @@ builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 var app = builder.Build();
 app.MapGet("hello", (IMediator mediator) => "hello");
 
+using var scope = app.Services.CreateScope();
+var dbContext = scope.ServiceProvider.GetService<FitFoodBookDbContext>();
+DataSeeder.Seed(dbContext);
 
 app.Run();

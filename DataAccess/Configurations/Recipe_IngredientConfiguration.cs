@@ -8,6 +8,6 @@ public class Recipe_IngredientConfiguration : IEntityTypeConfiguration<Recipe_In
 {
     public void Configure(EntityTypeBuilder<Recipe_Ingredient> builder)
     {
-        builder.HasKey(ri => new {ri.IngredientId, ri.RecipeId});
+        builder.HasKey(ri => new { ri.IngredientId, ri.RecipeId });
     }
 }

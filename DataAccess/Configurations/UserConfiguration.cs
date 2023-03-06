@@ -11,7 +11,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.FirstName)
             .IsRequired()
             .HasMaxLength(20);
-        
+
         builder.Property(x => x.LastName)
             .IsRequired()
             .HasMaxLength(20);
@@ -22,7 +22,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(x => x.DateOfBirth)
             .IsRequired();
-        
+
         builder.HasMany(u => u.Recipes)
             .WithOne(r => r.User)
             .HasForeignKey(r => r.UserId);
