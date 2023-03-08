@@ -1,6 +1,10 @@
-﻿namespace Domain.Entities;
+﻿using Application.Abstractions;
+using Domain.Entities;
+using MediatR;
 
-public class User
+namespace Application.Users.Commands;
+
+public class UpdateUser : IRequest<User>
 {
     public Guid Id { get; set; }
     public string FirstName { get; set; }

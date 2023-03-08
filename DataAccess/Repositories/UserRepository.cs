@@ -1,5 +1,7 @@
 ﻿using Application.Abstractions;
 using Domain.Entities;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories;
 
@@ -12,20 +14,42 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
+
     public async Task<User> CreateUser(User user)
     {
-        _context.Add(user);
+        await _context.AddAsync(user);
         await _context.SaveChangesAsync();
         return user;
     }
 
-    public Task<IEnumerable<User>> GetUsers()
+    public async Task<User?> GetUser(Guid id)
     {
-        throw new NotImplementedException();
+        return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
     }
 
-    public Task<User> GetUser(Guid id)
+    public async Task<List<User?>> GetUsers()
     {
-        throw new NotImplementedException();
+        return await _context.Users.ToListAsync();
+    }
+
+    public async Task<User> UpdateUser(User user, Guid id)
+    {
+        var userToUpdate = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        if (userToUpdate is null) throw new Exception($"User with id {id} was not found.");
+        userToUpdate.FirstName = user.FirstName;
+        userToUpdate.LastName = user.LastName;
+        userToUpdate.Email = user.Email;
+        userToUpdate.DateOfBirth = user.DateOfBirth;
+        userToUpdate.Recipes = user.Recipes;
+        await _context.SaveChangesAsync();
+        return userToUpdate;
+    }
+
+    public async Task DeleteUser(Guid id)
+    {
+        var userToRemove = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        if (userToRemove is null) throw new Exception($"User with id {id} was not found!");
+        _context.Remove(userToRemove);
+        await _context.SaveChangesAsync();
     }
 }
