@@ -15,5 +15,5 @@ public class Recipe
     public Guid UserId { get; set; }
     public User User { get; set; }
     public List<Ingredient> Ingredients { get; set; }
-    public List<RecipeTag> RecipeTags { get; set; }
+    public List<RecipeTag?> RecipeTags { get; set; }
 }

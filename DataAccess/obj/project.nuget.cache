@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "c2p+iOpTK3CklgAj5kSdmfM/85IgucA9DmqlNqz2d2mJpyhQvQ1mf/BjlHNszGIorufxENza+UjbWpAj2pes3w==",
+  "dgSpecHash": "W/EoFCozVzHV9W+V+qFnKvZ4AWlSUcNuFchFzugLpbveq4yGOExsp/lRilrMq/BbM+r4HRegc4nwUJyLj9UMKA==",
   "success": true,
   "projectFilePath": "C:\\Users\\kacpe\\Documents\\GitHub\\FitFoodBook\\DataAccess\\DataAccess.csproj",
   "expectedPackageFiles": [
@@ -41,9 +41,11 @@
     "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.24.0\\microsoft.identitymodel.tokens.6.24.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\kacpe\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\system.configuration.configurationmanager\\6.0.1\\system.configuration.configurationmanager.6.0.1.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",

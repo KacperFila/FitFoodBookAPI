@@ -1,11 +1,15 @@
+using System.Text.Json.Serialization;
 using Application.Abstractions;
+using Application.Recipes.Commands;
+using Application.Recipes.Queries;
 using Application.Users.Commands;
 using Application.Users.Queries;
 using DataAccess;
 using DataAccess.Repositories;
+using DataAccess.Extensions;
 using Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,14 +19,23 @@ builder.Services.AddDbContext<FitFoodBookDbContext>(opt => opt.UseSqlServer(conn
 
 builder.Services.AddMediatR(typeof(CreateUser));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
+builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+});
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 
-//using var scope = app.Services.CreateScope();
-//var dbContext = scope.ServiceProvider.GetService<FitFoodBookDbContext>();
-//DataSeeder.Seed(dbContext);
+using var scope = app.Services.CreateScope();
+var dbContext = scope.ServiceProvider.GetService<FitFoodBookDbContext>()!;
+DataSeeder.Seed(dbContext);
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapPost("user", async (IMediator mediator, User user) =>
 {
@@ -73,4 +86,37 @@ app.MapDelete("user/{id:guid}", async (IMediator mediator, Guid id) =>
     return Results.NoContent();
 });
 
+app.MapGet("recipes", async (IMediator mediator) =>
+{
+    var recipes = new GetRecipes();
+    return await mediator.Send(recipes);
+});
+
+app.MapGet("recipe/{id:guid}", async (IMediator mediator, Guid id) =>
+{
+    var recipe = new GetRecipe { Id = id };
+    return await mediator.Send(recipe);
+});
+
+app.MapPost("recipe", async (IMediator mediator, Recipe recipe) =>
+{
+    var recipeToCreate = new CreateRecipe
+    {
+        Id = recipe.Id,
+        Name = recipe.Name,
+        TimeOfPreparing = recipe.TimeOfPreparing,
+        AddedDate = recipe.AddedDate,
+        ModifiedDate = recipe.ModifiedDate,
+        UserId = recipe.UserId,
+        User = recipe.User,
+        Ingredients = recipe.Ingredients,
+        RecipeTags = recipe.RecipeTags,
+        AmountOfServings = recipe.AmountOfServings,
+        Calories = recipe.Calories,
+        Proteins = recipe.Proteins,
+        Carbohydrates = recipe.Carbohydrates,
+        Fats = recipe.Fats
+    };
+    return await mediator.Send(recipeToCreate);
+});
 app.Run();
