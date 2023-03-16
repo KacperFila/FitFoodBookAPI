@@ -61,6 +61,27 @@ namespace DataAccess.Migrations
                     b.ToTable("IngredientTags");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Ingredient_IngredientTag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IngredientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IngredientTagId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IngredientId");
+
+                    b.HasIndex("IngredientTagId");
+
+                    b.ToTable("IngredientIngredientTags");
+                });
+
             modelBuilder.Entity("Domain.Entities.Recipe", b =>
                 {
                     b.Property<Guid>("Id")
@@ -118,6 +139,48 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RecipeTags");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Recipe_Ingredient", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IngredientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RecipeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IngredientId");
+
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("RecipeIngredients");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Recipe_RecipeTag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RecipeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RecipeTagId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipeId");
+
+                    b.HasIndex("RecipeTagId");
+
+                    b.ToTable("RecipeRecipeTags");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -191,6 +254,25 @@ namespace DataAccess.Migrations
                     b.ToTable("RecipeRecipeTag");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Ingredient_IngredientTag", b =>
+                {
+                    b.HasOne("Domain.Entities.Ingredient", "Ingredient")
+                        .WithMany()
+                        .HasForeignKey("IngredientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.IngredientTag", "IngredientTag")
+                        .WithMany()
+                        .HasForeignKey("IngredientTagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ingredient");
+
+                    b.Navigation("IngredientTag");
+                });
+
             modelBuilder.Entity("Domain.Entities.Recipe", b =>
                 {
                     b.HasOne("Domain.Entities.User", "User")
@@ -200,6 +282,44 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Recipe_Ingredient", b =>
+                {
+                    b.HasOne("Domain.Entities.Ingredient", "Ingredient")
+                        .WithMany()
+                        .HasForeignKey("IngredientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Recipe", "Recipe")
+                        .WithMany()
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ingredient");
+
+                    b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Recipe_RecipeTag", b =>
+                {
+                    b.HasOne("Domain.Entities.Recipe", "Recipe")
+                        .WithMany()
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.RecipeTag", "RecipeTag")
+                        .WithMany()
+                        .HasForeignKey("RecipeTagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Recipe");
+
+                    b.Navigation("RecipeTag");
                 });
 
             modelBuilder.Entity("IngredientIngredientTag", b =>

@@ -19,7 +19,6 @@ builder.Services.AddDbContext<FitFoodBookDbContext>(opt => opt.UseSqlServer(conn
 
 builder.Services.AddMediatR(typeof(CreateUser));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.Configure<JsonOptions>(options =>
 {
@@ -76,7 +75,6 @@ app.MapGet("users", async (IMediator mediator) =>
 app.MapGet("user/{id:guid}", async (IMediator mediator, Guid id) =>
 {
     var userToGet = new GetUser { Id = id };
-    
     var result = await mediator.Send(userToGet);
     return Results.Ok(result);
 });
@@ -120,27 +118,5 @@ app.MapPost("recipe", async (IMediator mediator, Recipe recipe) =>
         Fats = recipe.Fats
     };
     return await mediator.Send(recipeToCreate);
-});
-
-app.MapPut("recipe/{id:guid}", async (IMediator mediator, Guid id, Recipe recipe) =>
-{
-    var recipeToUpdate = new UpdateRecipe
-    {
-        Id = id,
-        Name = recipe.Name,
-        TimeOfPreparing = recipe.TimeOfPreparing,
-        Calories = recipe.Calories,
-        Proteins = recipe.Proteins,
-        Carbohydrates = recipe.Carbohydrates,
-        Fats = recipe.Fats,
-        AmountOfServings = recipe.AmountOfServings,
-        AddedDate = recipe.AddedDate,
-        ModifiedDate = DateTime.Now,
-        Ingredients = recipe.Ingredients,
-        RecipeTags = recipe.RecipeTags,
-        User = recipe.User,
-        UserId = recipe.UserId
-    };
-    return await mediator.Send(recipeToUpdate);
 });
 app.Run();
