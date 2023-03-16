@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "WYgRV3MpLsVi95bVCw+I6oMwHGAps5Ie4/j/DMJXNpvJshCeMtIdkKshF+zHXRt1VaLm93PypTvn4ZsdBRGKUA==",
+  "dgSpecHash": "OrAXYuLnCoYY0i0cmhv+sL6VRwD13k3FWeLiORPV9H/nGs1c+VDWSB6f/alh9+J6955e8jNgKcZN6hdshzJ3XA==",
   "success": true,
   "projectFilePath": "C:\\Users\\kacpe\\Documents\\GitHub\\FitFoodBook\\MinimalAPI\\MinimalAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\kacpe\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\kacpe\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\bogus\\34.0.2\\bogus.34.0.2.nupkg.sha512",
@@ -12,7 +14,7 @@
     "C:\\Users\\kacpe\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.1.0\\mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
-    "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.0\\microsoft.data.sqlclient.5.1.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\5.1.0\\microsoft.data.sqlclient.sni.runtime.5.1.0.nupkg.sha512",
     "C:\\Users\\kacpe\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.0-preview.1.23111.4\\microsoft.entityframeworkcore.8.0.0-preview.1.23111.4.nupkg.sha512",

@@ -1,4 +1,6 @@
 ﻿using Application.Abstractions;
+using Application.Users.Dtos;
+using AutoMapper;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -8,10 +10,12 @@ namespace DataAccess.Repositories;
 public class UserRepository : IUserRepository
 {
     private readonly FitFoodBookDbContext _context;
+    private readonly IMapper _mapper;
 
-    public UserRepository(FitFoodBookDbContext context)
+    public UserRepository(FitFoodBookDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
 
@@ -22,9 +26,11 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public async Task<User?> GetUser(Guid id)
+    public async Task<UserDto?> GetUser(Guid id)
     {
-        return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        var userdto = _mapper.Map<UserDto>(user);
+        return userdto;
     }
 
     public async Task<List<User?>> GetUsers()

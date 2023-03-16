@@ -8,6 +8,6 @@ public class Ingredient_IngredientTagConfiguration : IEntityTypeConfiguration<In
 {
     public void Configure(EntityTypeBuilder<Ingredient_IngredientTag> builder)
     {
-        //builder.HasKey(iit => new { iit.IngredientId, iit.IngredientTagId });
+        builder.HasKey(iit => new { iit.IngredientId, iit.IngredientTagId });
     }
 }

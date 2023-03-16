@@ -21,7 +21,7 @@ public class CreateUserHandler : IRequestHandler<CreateUser, User>
             FirstName = request.FirstName,
             LastName = request.LastName,
             Email = request.Email,
-            DateOfBirth = request.DateOfBirth,
+            DateOfBirth = request.DateOfBirth
         };
         return await _userRepository.CreateUser(newUser);
     }

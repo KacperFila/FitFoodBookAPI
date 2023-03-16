@@ -30,8 +30,8 @@ public static class DataSeeder
             .RuleFor(r => r.Fats, r => r.Random.Number(10, 50))
             .RuleFor(r => r.AmountOfServings, r => r.Random.Number(1, 4))
             .RuleFor(r => r.Ingredients, r => ingredientGenerator.Generate(new Random().Next(5, 8)))
-            .RuleFor(r => r.RecipeTags, r => recipeTagGenerator.Generate(new Random().Next(1, 5)));
-        
+            .RuleFor(r => r.RecipeTags!, r => recipeTagGenerator.Generate(new Random().Next(1, 5)));
+
         var userGenerator = new Faker<User>()
             .RuleFor(u => u.FirstName, u => u.Name.FirstName())
             .RuleFor(u => u.LastName, u => u.Name.LastName())
@@ -40,7 +40,7 @@ public static class DataSeeder
             .RuleFor(u => u.Recipes, u => recipeGenerator.Generate(new Random().Next(4, 8)));
 
         var users = userGenerator.Generate(10);
-        
+
         context.AddRange(users);
         context.SaveChanges();
     }
