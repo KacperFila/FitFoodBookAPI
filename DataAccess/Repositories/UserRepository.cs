@@ -1,6 +1,5 @@
 ﻿using Application.Abstractions;
 using Domain.Entities;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories;
@@ -29,7 +28,9 @@ public class UserRepository : IUserRepository
 
     public async Task<List<User?>> GetUsers()
     {
-        return await _context.Users.ToListAsync();
+        var users = await _context.Users.ToListAsync();
+        if (!users.Any()) throw new Exception("Users were not found!");
+        return users!;
     }
 
     public async Task<User> UpdateUser(User user, Guid id)
