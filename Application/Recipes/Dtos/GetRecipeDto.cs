@@ -1,11 +1,9 @@
 ﻿using Domain.Entities;
-using MediatR;
 
-namespace Application.Recipes.Commands;
+namespace Application.Recipes.Dtos;
 
-public class UpdateRecipe : IRequest<Recipe>
+public class GetRecipeDto
 {
-    public Guid Id { get; set; }
     public string Name { get; set; }
     public int TimeOfPreparing { get; set; }
     public int Calories { get; set; }
@@ -17,6 +15,4 @@ public class UpdateRecipe : IRequest<Recipe>
     public DateTime? ModifiedDate { get; set; }
     public List<Ingredient> Ingredients { get; set; }
     public List<RecipeTag?> RecipeTags { get; set; }
-    public Guid UserId { get; set; }
-    public User User { get; set; }
 }

@@ -9,7 +9,6 @@ public class UserMappingProfile : Profile
 {
     public UserMappingProfile()
     {
-        CreateMap<UserDto, User>()
-            .ForMember(d => d.Recipes, opt => opt.MapFrom(src => src.RecipesNames));
+        CreateMap<User, UserDto>();
     }
 }

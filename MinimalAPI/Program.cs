@@ -1,6 +1,5 @@
 using System.Text.Json.Serialization;
 using Application.Abstractions;
-using Application.Recipes.Commands;
 using Application.Recipes.Queries;
 using Application.Users.Commands;
 using Application.Users.Queries;
@@ -18,9 +17,9 @@ var connectionString = builder.Configuration.GetConnectionString("DevelopConnect
 builder.Services.AddDbContext<FitFoodBookDbContext>(opt => opt.UseSqlServer(connectionString));
 
 builder.Services.AddMediatR(typeof(CreateUser));
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<UserRepository>();
-builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IRecipeRepository, RecipeRepository>();
 builder.Services.Configure<JsonOptions>(options =>
 {
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
@@ -45,8 +44,7 @@ app.MapPost("user", async (IMediator mediator, User user) =>
         FirstName = user.FirstName,
         LastName = user.LastName,
         Email = user.Email,
-        DateOfBirth = user.DateOfBirth,
-        Recipes = user.Recipes
+        DateOfBirth = user.DateOfBirth
     };
     var result = await mediator.Send(userToCreate);
     return Results.Ok(result);
@@ -75,7 +73,7 @@ app.MapGet("users", async (IMediator mediator) =>
 
 app.MapGet("user/{id:guid}", async (IMediator mediator, Guid id) =>
 {
-    var userToGet = new GetUser { Id = id };
+    var userToGet = new GetUser(id);
     
     var result = await mediator.Send(userToGet);
     return Results.Ok(result);
@@ -88,59 +86,24 @@ app.MapDelete("user/{id:guid}", async (IMediator mediator, Guid id) =>
     return Results.NoContent();
 });
 
+app.MapGet("recipe/{id:Guid}", async (IMediator mediator, Guid id) =>
+{
+    var recipe = new GetRecipeByIdQuery(id);
+    var result = await mediator.Send(recipe);
+    return Results.Ok(result);
+});
+
+app.MapGet("recipeWithoutMacros/{id:Guid}", async (IMediator mediator, Guid id) =>
+{
+    var recipe = new GetRecipeWithoutMacrosByIdQuery(id);
+    var result = await mediator.Send(recipe);
+    return Results.Ok(result);
+});
+
 app.MapGet("recipes", async (IMediator mediator) =>
 {
-    var recipes = new GetRecipes();
-    return await mediator.Send(recipes);
-});
-
-app.MapGet("recipe/{id:guid}", async (IMediator mediator, Guid id) =>
-{
-    var recipe = new GetRecipe { Id = id };
-    return await mediator.Send(recipe);
-});
-
-app.MapPost("recipe", async (IMediator mediator, Recipe recipe) =>
-{
-    var recipeToCreate = new CreateRecipe
-    {
-        Id = recipe.Id,
-        Name = recipe.Name,
-        TimeOfPreparing = recipe.TimeOfPreparing,
-        AddedDate = recipe.AddedDate,
-        ModifiedDate = recipe.ModifiedDate,
-        UserId = recipe.UserId,
-        User = recipe.User,
-        Ingredients = recipe.Ingredients,
-        RecipeTags = recipe.RecipeTags,
-        AmountOfServings = recipe.AmountOfServings,
-        Calories = recipe.Calories,
-        Proteins = recipe.Proteins,
-        Carbohydrates = recipe.Carbohydrates,
-        Fats = recipe.Fats
-    };
-    return await mediator.Send(recipeToCreate);
-});
-
-app.MapPut("recipe/{id:guid}", async (IMediator mediator, Guid id, Recipe recipe) =>
-{
-    var recipeToUpdate = new UpdateRecipe
-    {
-        Id = id,
-        Name = recipe.Name,
-        TimeOfPreparing = recipe.TimeOfPreparing,
-        Calories = recipe.Calories,
-        Proteins = recipe.Proteins,
-        Carbohydrates = recipe.Carbohydrates,
-        Fats = recipe.Fats,
-        AmountOfServings = recipe.AmountOfServings,
-        AddedDate = recipe.AddedDate,
-        ModifiedDate = DateTime.Now,
-        Ingredients = recipe.Ingredients,
-        RecipeTags = recipe.RecipeTags,
-        User = recipe.User,
-        UserId = recipe.UserId
-    };
-    return await mediator.Send(recipeToUpdate);
+    var recipes = new GetAllRecipesQuery();
+    var result = await mediator.Send(recipes);
+    return Results.Ok(result);
 });
 app.Run();

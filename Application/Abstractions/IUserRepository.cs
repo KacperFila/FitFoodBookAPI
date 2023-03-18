@@ -8,6 +8,6 @@ public interface IUserRepository
     Task<User> CreateUser(User user);
     Task<List<User?>> GetUsers();
     Task<User> UpdateUser(User user, Guid id);
-
+    Task<User> GetUser(Guid id);
     Task DeleteUser(Guid id);
 }

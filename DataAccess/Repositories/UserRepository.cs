@@ -26,11 +26,10 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public async Task<UserDto?> GetUser(Guid id)
+    public async Task<User?> GetUser(Guid id)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
-        var userdto = _mapper.Map<UserDto>(user);
-        return userdto;
+        return user;
     }
 
     public async Task<List<User?>> GetUsers()

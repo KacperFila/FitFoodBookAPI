@@ -9,5 +9,5 @@ public class CreateUser : IRequest<User>
     public string LastName { get; set; }
     public DateTime DateOfBirth { get; set; }
     public string Email { get; set; }
-    public List<Recipe>? Recipes { get; set; }
+
 }
