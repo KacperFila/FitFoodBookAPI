@@ -23,8 +23,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Recipes\CommandHandlers" />
-      <Folder Include="Recipes\Commands" />
       <Folder Include="Recipes\Validators" />
     </ItemGroup>
 

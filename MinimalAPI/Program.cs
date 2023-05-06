@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using Application.Abstractions;
+using Application.Recipes.Commands;
 using Application.Recipes.Queries;
 using Application.Users.Commands;
 using Application.Users.Queries;
@@ -104,6 +105,26 @@ app.MapGet("recipes", async (IMediator mediator) =>
 {
     var recipes = new GetAllRecipesQuery();
     var result = await mediator.Send(recipes);
+    return Results.Ok(result);
+});
+
+app.MapPost("recipe", async (IMediator mediator, Recipe recipe) =>
+{
+    var createdRecipe = new CreateRecipeCommand()
+    {
+        Name = recipe.Name,
+        TimeOfPreparing = recipe.TimeOfPreparing,
+        Calories = recipe.Calories,
+        Proteins = recipe.Proteins,
+        Carbohydrates = recipe.Carbohydrates,
+        Fats = recipe.Fats,
+        AmountOfServings = recipe.AmountOfServings,
+        UserId = recipe.UserId,
+        Ingredients = recipe.Ingredients,
+        RecipeTags = recipe.RecipeTags
+    };
+
+    var result = await mediator.Send(createdRecipe);
     return Results.Ok(result);
 });
 app.Run();

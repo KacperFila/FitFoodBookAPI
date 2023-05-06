@@ -25,11 +25,10 @@ public class RecipeRepository : IRecipeRepository
             .FirstOrDefaultAsync(r => r.Id == id);
     }
 
-    public async Task<Recipe> CreateRecipe(Recipe recipe)
+    public async Task CreateRecipe(Recipe recipe)
     {
         await _context.AddAsync(recipe);
         await _context.SaveChangesAsync();
-        return recipe;
     }
 
     public async Task<Recipe> UpdateRecipe(Guid id, Recipe recipe)
